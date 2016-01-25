@@ -7,14 +7,20 @@ var passport = require('passport');
 var session = require('express-session');
 
 var app = express();
+const ClientID = "9cd22319ac2ac62";
+const ClientSecret = "b72a0a479618ab094fcb6aec1204bf98abf8f854";
+
 require('dotenv').load();
 require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
-
+app.get
 app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
 app.use('/public', express.static(process.cwd() + '/public'));
 app.use('/common', express.static(process.cwd() + '/app/common'));
+app.get('/form', function(req, res) {
+        res.end("darksome");
+})
 
 app.use(session({
 	secret: 'secretClementine',
