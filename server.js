@@ -1,30 +1,50 @@
 'use strict';
 
 var express = require('express');
-var routes = require('./app/routes/index.js');
 var mongoose = require('mongoose');
-var passport = require('passport');
 var session = require('express-session');
 var https = require('https');
 
 var app = express();
 
 require('dotenv').load();
-require('./app/config/passport')(passport);
 
 mongoose.connect(process.env.MONGO_URI);
 const ClientID = process.env.CLIENT_ID;
 
-app.use('/controllers', express.static(process.cwd() + '/app/controllers'));
-app.use('/public', express.static(process.cwd() + '/public'));
-app.use('/common', express.static(process.cwd() + '/app/common'));
+var SearchSchema = new mongoose.Schema({
+  terms: String,
+  time: String,
+});
+let sModel=mongoose.model('SearchList', SearchSchema);
 
-app.get('/search/:str', function(req, res) {
+app.use('/public', express.static(process.cwd() + '/public'));
+
+app.get('/imagesearch/latest',function(req,res){
+console.log("probably the last searches were about cats anyway.");
+  let retval="error";
+  let q = sModel.find({},{_id:0,__v:0});
+  q.exec(function(err,data){
+    console.log("query returns "+err+data);
+    res.end(JSON.stringify(data));
+  });
+});
+
+
+app.get('/imagesearch/:str', function(req, res) {
   let str=req.params.str;
   let mods=str.split("?");
- 
+  let newSearch = new sModel({terms:str,time:new Date()});
+  newSearch.save(function (err, data) {
+    console.log("db data"+data);
+  });
+  let offset = 0;
+  if(req.query.offset)
+    offset=parseInt(req.query.offset);
+
   let headers = { Authorization: "Client-ID "+ClientID };
 
+  console.log("offset"+offset);
   var options = {
     host: 'api.imgur.com',
     path: '/3/gallery/search?q_all='+mods[0].replace(" ","%20"),
@@ -42,27 +62,20 @@ app.get('/search/:str', function(req, res) {
     });
 
     imageRes.on('end', function() {
+      let filteredResponse = [];
       let responseObject = JSON.parse(responseString);
-      console.log(responseObject);
-      res.end(JSON.stringify(responseObject));
+      for (let i = 10*offset; i < 10*(offset+1) ; i++){
+	if (i<responseObject.data.length)
+          filteredResponse.push ({"title":responseObject.data[i].title, "link":responseObject.data[i].link});
+      }
+//      console.log(responseObject);
+      res.end(JSON.stringify(filteredResponse));
     });
   });
   var retval="";
   request.write(retval);
   request.end();
-  console.log("clearing func"+retval);
 });
-
-app.use(session({
-	secret: 'secretClementine',
-	resave: false,
-	saveUninitialized: true
-}));
-
-app.use(passport.initialize());
-app.use(passport.session());
-
-routes(app, passport);
 
 var port = process.env.PORT || 8080;
 app.listen(port,  function () {
