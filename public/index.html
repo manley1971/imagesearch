@@ -3,37 +3,37 @@
 <html>
 
 	<head>
-		<title>Clementine.js - The elegant and lightweight full stack JavaScript boilerplate.</title>
+		<title>funky cool image search</title>
 		
 		<link href="/public/css/main.css" rel="stylesheet" type="text/css">
 	</head>
 
-	<header>
-		<p>Welcome, <span id="display-name"></span>!</p>
-		<a class="menu" href="/profile">Profile</a>
-		<p>|</p>
-		<a class="menu" href="/logout">Logout</a>
-	</header>
-
 	<body>
-		<div class="container">
-			<img src="/public/img/clementine_150.png" />
-			<br />
-			<p class="clementine-text">Clementine.js</p>
-		</div>
-	
-		<div class="container">
-			<p>You have clicked the button <span id="click-nbr"></span> times.</p>
-			<br />
-			<div class="btn-container">
-				<button type="submit" class="btn btn-add">CLICK ME!</button>
-				<button class="btn btn-delete">RESET</button>
-			</div>
-		</div>
-		
-		<script type="text/javascript" src="common/ajax-functions.js"></script>
-		<script type="text/javascript" src="controllers/clickController.client.js"></script>
-		<script type="text/javascript" src="controllers/userController.client.js"></script>
-	</body>
+	<body>
+  <h2>URL ImageSearch Microservice</h2>
 
+  <h4>Here are the specific user stories that are implemented for
+  this project:</h4>
+
+  <ul>
+    <li>User Story: I can get the image URLs, alt text and page urls for a set of images relating to a given search string.</li>
+
+    <li>User Story: I can paginate through the responses by adding a ?offset=2 parameter to the URL.</li>
+
+    <li>User Story: I can get a list of the most recently submitted search strings.</li>
+  </ul><br>
+
+  <h4>Here are some examples:</h4>
+
+  <ul>
+    <li>
+https://imagesearch-manley1971.c9users.io/imagesearch/chess%20funny?offset=1
+    </li>
+
+    <li>
+https://imagesearch-manley1971.c9users.io/imagesearch/latest
+    </li>
+
+  </ul>
+</body>
 </html>
