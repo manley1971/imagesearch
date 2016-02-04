@@ -9,6 +9,7 @@ var app = express();
 
 require('dotenv').load();
 
+// we use mongoose managed by mongolab 
 mongoose.connect(process.env.MONGO_URI);
 const ClientID = process.env.CLIENT_ID;
 
