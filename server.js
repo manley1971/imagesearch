@@ -9,9 +9,11 @@ var app = express();
 
 //require('dotenv').load();
 
+const M = "mongodb://manley:manley@ds055565.mongolab.com:55565/dmanley"
 // we use mongoose managed by mongolab 
-mongoose.connect(process.env.MONGO_URI);
 console.log("mongo uri"+process.env.MONGO_URI);
+mongoose.connect(M);
+//mongoose.connect(process.env.MONGO_URI);
 //const ClientID = process.env.CLIENT_ID;
 const ClientID = '9cd22319ac2ac62';
 var SearchSchema = new mongoose.Schema({
@@ -20,19 +22,21 @@ var SearchSchema = new mongoose.Schema({
 });
 let sModel = mongoose.model('SearchList', SearchSchema);
 
+//Put whatever is in public file as default
 app.use('/', express.static(process.cwd() + '/public'));
 
 //get the values stored in the database
 app.get('/imagesearch/latest', function(req, res) {
-/*    let q = sModel.find({}, {
+    let q = sModel.find({}, {
         _id: 0,
         __v: 0
     });
-    q.exec(function(err, data) {
+    if (q) 
+      q.exec(function(err, data) {
         if (err) res.end("probably the last searches were about cats anyway, but there was an error looking it up..");
         res.end(JSON.stringify(data));
-    });*/
-  res.end(JSON.stringify("error"));
+      });
+    res.end(JSON.stringify("error"));
 });
 
 // get the str we are about to search
