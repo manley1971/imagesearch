@@ -7,12 +7,13 @@ var https = require('https');
 
 var app = express();
 
-require('dotenv').load();
+//require('dotenv').load();
 
 // we use mongoose managed by mongolab 
-mongoose.connect(process.env.MONGO_URI);
-const ClientID = process.env.CLIENT_ID;
-
+mongoose.connect(MONGO_URI);
+console.log("mongo uri"+MONGO_URI);
+//const ClientID = process.env.CLIENT_ID;
+const ClientId = '9cd22319ac2ac62';
 var SearchSchema = new mongoose.Schema({
     terms: String,
     time: String,
