@@ -24,15 +24,15 @@ app.use('/', express.static(process.cwd() + '/public'));
 
 //get the values stored in the database
 app.get('/imagesearch/latest', function(req, res) {
-    let retval = "error";
-    let q = sModel.find({}, {
+/*    let q = sModel.find({}, {
         _id: 0,
         __v: 0
     });
     q.exec(function(err, data) {
-        if (err) console.log("probably the last searches were about cats anyway, but there was an error looking it up..");
+        if (err) res.end("probably the last searches were about cats anyway, but there was an error looking it up..");
         res.end(JSON.stringify(data));
-    });
+    });*/
+  res.end(JSON.stringify("error");
 });
 
 // get the str we are about to search
