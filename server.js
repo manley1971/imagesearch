@@ -34,9 +34,10 @@ app.get('/imagesearch/latest', function(req, res) {
     });
 });
 
-
+// get the str we are about to search
 app.get('/imagesearch/:str', function(req, res) {
     let str = req.params.str;
+//xxx not sure if splitting on the ? is standard
     let mods = str.split("?");
     let newSearch = new sModel({
         terms: str,
