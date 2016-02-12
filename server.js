@@ -12,8 +12,8 @@ var app = express();
 const M = "mongodb://manley:manley@ds055565.mongolab.com:55565/dmanley"
 // we use mongoose managed by mongolab 
 console.log("mongo uri"+process.env.MONGO_URI);
-mongoose.connect(M);
-//mongoose.connect(process.env.MONGO_URI);
+//mongoose.connect(M);
+mongoose.connect(process.env.MONGO_URI);
 //const ClientID = process.env.CLIENT_ID;
 const ClientID = '9cd22319ac2ac62';
 var SearchSchema = new mongoose.Schema({
