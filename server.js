@@ -32,7 +32,7 @@ app.get('/imagesearch/latest', function(req, res) {
         if (err) res.end("probably the last searches were about cats anyway, but there was an error looking it up..");
         res.end(JSON.stringify(data));
     });*/
-  res.end(JSON.stringify("error");
+  res.end(JSON.stringify("error"));
 });
 
 // get the str we are about to search
