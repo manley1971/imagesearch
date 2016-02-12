@@ -21,6 +21,7 @@ let sModel = mongoose.model('SearchList', SearchSchema);
 
 app.use('/', express.static(process.cwd() + '/public'));
 
+//get the values stored in the database
 app.get('/imagesearch/latest', function(req, res) {
     let retval = "error";
     let q = sModel.find({}, {
