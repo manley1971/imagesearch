@@ -31,6 +31,7 @@ app.get('/imagesearch/latest', function(req, res) {
         _id: 0,
         __v: 0
     });
+    ////submit query that gets everything
     if (q) 
       q.exec(function(err, data) {
         if (err) res.end("probably the last searches were about cats anyway, but there was an error looking it up..");
