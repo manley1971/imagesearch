@@ -7,20 +7,14 @@ var https = require('https');
 
 var app = express();
 
-//require('dotenv').load();
+require('dotenv').load();
 
-const M = "mongodb://manley:manley@ds055565.mongolab.com:55565/dmanley"
 // we use mongoose managed by mongolab 
 console.log("mongo uri"+process.env.MONGO_URI);
 mongoose.connect(process.env.MONGO_URI);
 
-if (M==process.env.MONGO_URI)
-  console.log("Mongo strings are the same");
-else
-  console.log("Mongo strings are different");
-//mongoose.connect(process.env.MONGO_URI);
-//const ClientID = process.env.CLIENT_ID;
-const ClientID = '9cd22319ac2ac62';
+mongoose.connect(process.env.MONGO_URI);
+const ClientID = process.env.CLIENT_ID;
 var SearchSchema = new mongoose.Schema({
     terms: String,
     time: String,
@@ -49,7 +43,7 @@ app.get('/imagesearch/latest', function(req, res) {
 // get the str we are about to search
 app.get('/imagesearch/:str', function(req, res) {
     let str = req.params.str;
-//xxx not sure if splitting on the ? is standard
+    //xxx not sure if splitting on the ? is standard
     let mods = str.split("?");
     let newSearch = new sModel({
         terms: str,
