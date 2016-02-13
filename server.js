@@ -79,7 +79,8 @@ app.get('/imagesearch/:str', function(req, res) {
                 if (i < responseObject.data.length)
                     filteredResponse.push({
                         "title": responseObject.data[i].title,
-                        "link": responseObject.data[i].link
+                        "link": responseObject.data[i].link,
+                        "account_url":responseObject.data[i].account_url
                     });
             }
             res.end(JSON.stringify(filteredResponse));
