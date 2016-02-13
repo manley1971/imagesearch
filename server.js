@@ -11,7 +11,6 @@ require('dotenv').load();
 
 // we use mongoose managed by mongolab 
 console.log("mongo uri"+process.env.MONGO_URI);
-mongoose.connect(process.env.MONGO_URI);
 
 mongoose.connect(process.env.MONGO_URI);
 const ClientID = process.env.CLIENT_ID;
